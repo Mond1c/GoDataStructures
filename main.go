@@ -1,12 +1,13 @@
 package main
 
+import "fmt"
+
 func main() {
-	l := List{head: nil, tail: nil, size: 0}
+	vec := Vector[int]{}
 	for i := 1; i <= 10; i++ {
-		l.add(i)
-		l.add(3)
+		vec.add(i)
 	}
-	l.print()
-	l.remove_by_value(3)
-	l.print()
+	fmt.Printf("vec: %v\n", vec)
+	vec.remove(2)
+	fmt.Printf("vec: %v\n", vec)
 }
