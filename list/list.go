@@ -1,25 +1,25 @@
-package main
+package list
 
 import "fmt"
 
-type Node struct {
-	value int
-	next  *Node
+type Node[T comparable] struct {
+	value T
+	next  *Node[T]
 }
 
-type List struct {
-	head *Node
-	tail *Node
+type List[T comparable] struct {
+	head *Node[T]
+	tail *Node[T]
 	size int
 }
 
-func (this *List) is_empty() bool {
+func (this *List[T]) IsEmpty() bool {
 	return this.size == 0
 }
 
-func (this *List) add(value int) {
-	ptr := Node{value: value, next: nil}
-	if this.is_empty() {
+func (this *List[T]) Add(value T) {
+	ptr := Node[T]{value: value, next: nil}
+	if this.IsEmpty() {
 		this.head = &ptr
 		this.tail = &ptr
 		this.size++
@@ -30,8 +30,8 @@ func (this *List) add(value int) {
 	this.size++
 }
 
-func (this *List) remove_first() {
-	if this.is_empty() {
+func (this *List[T]) RemoveFirst() {
+	if this.IsEmpty() {
 		panic("List is empty")
 	}
 	if this.size == 1 {
@@ -44,8 +44,8 @@ func (this *List) remove_first() {
 	this.size--
 }
 
-func (this *List) remove_last() {
-	if this.is_empty() {
+func (this *List[T]) RemoveLast() {
+	if this.IsEmpty() {
 		panic("List is empty")
 	}
 	if this.size == 1 {
@@ -63,19 +63,19 @@ func (this *List) remove_last() {
 	this.size--
 }
 
-func (this *List) remove_by_index(index int) {
+func (this *List[T]) RemoveByIndex(index int) {
 	if index < 0 || index >= this.size {
 		panic("Invalid index")
 	}
-	if this.is_empty() {
+	if this.IsEmpty() {
 		panic("List is empty")
 	}
 	if index == 0 {
-		this.remove_first()
+		this.RemoveFirst()
 		return
 	}
 	if index == this.size-1 {
-		this.remove_last()
+		this.RemoveLast()
 		return
 	}
 	slow_ptr := this.head
@@ -88,14 +88,14 @@ func (this *List) remove_by_index(index int) {
 	fast_ptr.next = nil
 }
 
-func (this *List) remove_by_value(value int) {
-	if this.is_empty() {
+func (this *List[T]) RemoveByValue(value T) {
+	if this.IsEmpty() {
 		panic("List is empty")
 	}
 	for this.head.value == value {
-		this.remove_first()
+		this.RemoveFirst()
 	}
-	if this.is_empty() || this.size == 1 {
+	if this.IsEmpty() || this.size == 1 {
 		return
 	}
 	slow_ptr := this.head
@@ -110,13 +110,13 @@ func (this *List) remove_by_value(value int) {
 	}
 }
 
-func (this *List) print() {
-	if this.is_empty() {
+func (this *List[T]) Print() {
+	if this.IsEmpty() {
 		return
 	}
 	ptr := this.head
 	for ptr != nil {
-		fmt.Printf("%d ", ptr.value)
+		fmt.Printf("%v ", ptr.value)
 		ptr = ptr.next
 	}
 	fmt.Println()

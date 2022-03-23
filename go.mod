@@ -1,3 +1,3 @@
-module example/user/hello
+module structures
 
 go 1.18
