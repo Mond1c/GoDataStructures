@@ -2,16 +2,15 @@ package main
 
 import (
 	"fmt"
-	. "structures/stack"
+	. "structures/queue"
 )
 
 func main() {
-	stack := Stack[int]{}
+	queue := Queue[int]{}
 	for i := 1; i <= 10; i++ {
-		stack.Add(i)
+		queue.Push(i)
 	}
-	fmt.Printf("stack: %v\n", stack)
-	fmt.Printf("stack.Top(): %v\n", stack.Top())
-	stack.Pop()
-	fmt.Printf("stack.Top(): %v\n", stack.Top())
+	for !queue.IsEmpty() {
+		fmt.Println(queue.Pop())
+	}
 }

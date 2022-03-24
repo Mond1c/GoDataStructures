@@ -110,6 +110,25 @@ func (this *List[T]) RemoveByValue(value T) {
 	}
 }
 
+func (this *List[T]) First() T {
+	return this.head.value
+}
+
+func (this *List[T]) Last() T {
+	return this.tail.value
+}
+
+func (this *List[T]) Get(index int) T {
+	if index < 0 || index >= this.size {
+		panic("Invalid index")
+	}
+	ptr := this.head
+	for i := 0; i < index; i++ {
+		ptr = ptr.next
+	}
+	return ptr.value
+}
+
 func (this *List[T]) Print() {
 	if this.IsEmpty() {
 		return

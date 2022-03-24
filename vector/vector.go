@@ -1,6 +1,6 @@
 package vector
 
-type Vector[T any] struct {
+type Vector[T comparable] struct {
 	data []T
 	size int
 }
